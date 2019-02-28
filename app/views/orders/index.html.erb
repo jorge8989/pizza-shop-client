@@ -1,44 +1,86 @@
-<h1>Orders</h1>
+<script type="text/template" class="order-form-template">
+  <div>
+    <h2>New Order</h2>
+    <products-table-component v-bind:products="products"></products-table-component>
+    <form v-on:submit.prevent="submit()">
+      <div class="form-group">
+        <select class="form-control" v-model=product.cheese id="cheese">
+          <option v-for="cheese in cheeses" :value="cheese">{{ cheese }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select class="form-control" v-model=product.sauce id="sauce">
+          <option v-for="sauce in sauces" :value="sauce">{{ sauce }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select class="form-control" v-model=product.crust id="crust">
+          <option v-for="crust in crusts" :value="crust">{{ crust }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select class="form-control" v-model=product.size id="size">
+          <option v-for="size in sizes" :value="size">{{ size }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select class="form-control" v-model=product.slices id="slices">
+          <option v-for="slices in slices_options" :value="slices">{{ slices }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-success btn-small">
+      </div>
+    </form>
+    <button class="btn btn-primary btn-md" :disabled="products.length < 1" v-on:click="makerOrder">Submit Order</button>
+  </div>
+</script>
+<script type="text/template" class="products-table-template">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Food</th>
+        <th>Size</th>
+        <th>Sauce</th>
+        <th>Cheese</th>
+        <th>Crust</th>
+        <th>Toppings</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="product of products">
+        <td>
+          {{product.food_name}}
+        </td>
+        <td>{{product.size}}</td>
+        <td>{{product.sauce}}</td>
+        <td>{{product.cheese}}</td>
+        <td>{{product.crust}}</td>
+        <td>
+          <p v-for="topping of product.toppings" :key="topping.id">
+            {{topping.name}}
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</script>
 <script type="text/template" class="orders-table-template">
   <div>
     <div v-for="order of orders" :key="order.id">
-      <h4>Order {{order.id}}</h4>
-      <h5>State: {{order.state}}</h5>
-      <table class="table table-bordered table-striped">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Food</th>
-            <th>Size</th>
-            <th>Sauce</th>
-            <th>Cheese</th>
-            <th>Crust</th>
-            <th>Toppings</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="product of order.products">
-            <td>
-              {{product.id}}
-            </td>
-            <td>
-              {{product.food_name}}
-            </td>
-            <td>{{product.size}}</td>
-            <td>{{product.sauce}}</td>
-            <td>{{product.cheese}}</td>
-            <td>{{product.crust}}</td>
-            <td>
-              <span v-for="topping of product.toppings" :key="topping.id">
-                {{topping.name}}
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <h5>Order {{order.id}}</h5>
+      <products-table-component v-bind:products="order.products"></products-table-component>
     </div>
   </div>
 </script>
 <div class="vue-app">
-  <orders-table-component v-bind:orders="orders"></orders-table-component>
+  <div class="row">
+    <div class="col-md-6">
+      <order-form-component v-bind:orders="orders"></order-form-component>
+    </div>
+    <div class="col-md-6">
+      <h2>Orders</h2>
+      <orders-table-component v-bind:orders="orders"></orders-table-component>
+    </div>
+  </div>
 </div>
