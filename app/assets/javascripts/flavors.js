@@ -10,6 +10,21 @@ function FlavorsClient() {
             name: ''
           }
         }
+      },
+      methods: {
+        submit: function() {
+          var self = this;
+          $.ajax({
+            type: "POST",
+            url: 'http://localhost:3010/api/flavors',
+            data: self.flavor,
+            dataType: 'JSON',
+            success: function(data) {
+              self.flavors.push(data);
+              self.flavor.name = null;
+            }
+          });
+        }
       }
     });
 
