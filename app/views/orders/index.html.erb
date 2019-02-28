@@ -4,27 +4,32 @@
     <products-table-component v-bind:products="products"></products-table-component>
     <form v-on:submit.prevent="submit()">
       <div class="form-group">
-        <select class="form-control" v-model=product.cheese id="cheese">
+        <select class="form-control" v-model=product.food_id id="food_id" v-on:change="onfoodchange" required>
+          <option v-for="food in foods" :value="food.id">{{ food.name }}</option>
+        </select>
+      </div>
+      <div v-if="product.food_name == 'Pizza'" class="form-group">
+        <select class="form-control" v-model=product.cheese id="cheese" required>
           <option v-for="cheese in cheeses" :value="cheese">{{ cheese }}</option>
         </select>
       </div>
-      <div class="form-group">
-        <select class="form-control" v-model=product.sauce id="sauce">
+      <div v-if="product.food_name == 'Pizza'" class="form-group">
+        <select class="form-control" v-model=product.sauce id="sauce" required>
           <option v-for="sauce in sauces" :value="sauce">{{ sauce }}</option>
         </select>
       </div>
-      <div class="form-group">
-        <select class="form-control" v-model=product.crust id="crust">
+      <div v-if="product.food_name == 'Pizza'" class="form-group">
+        <select class="form-control" v-model=product.crust id="crust" required>
           <option v-for="crust in crusts" :value="crust">{{ crust }}</option>
         </select>
       </div>
-      <div class="form-group">
-        <select class="form-control" v-model=product.size id="size">
+      <div v-if="product.food_name == 'Pizza'" class="form-group">
+        <select class="form-control" v-model=product.size id="size" required>
           <option v-for="size in sizes" :value="size">{{ size }}</option>
         </select>
       </div>
-      <div class="form-group">
-        <select class="form-control" v-model=product.slices id="slices">
+      <div v-if="product.food_name == 'Pizza'" class="form-group">
+        <select class="form-control" v-model=product.slices id="slices" required>
           <option v-for="slices in slices_options" :value="slices">{{ slices }}</option>
         </select>
       </div>
@@ -76,7 +81,7 @@
 <div class="vue-app">
   <div class="row">
     <div class="col-md-6">
-      <order-form-component v-bind:orders="orders"></order-form-component>
+      <order-form-component v-bind:orders="orders" v-bind:foods="foods"></order-form-component>
     </div>
     <div class="col-md-6">
       <h2>Orders</h2>

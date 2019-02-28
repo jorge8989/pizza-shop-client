@@ -11,7 +11,7 @@ function OrdersClient() {
     });
     var OrderFormComponent = Vue.extend({
       template: $('.order-form-template').text(),
-      props: ['orders'],
+      props: ['orders', 'foods'],
       data: function() {
         return {
           cheeses: ['Cheddar', 'American'],
@@ -24,19 +24,42 @@ function OrdersClient() {
           },
           products: [],
           product: {
-            food_id: 1,
-            flavor_id: 1,
-            food_name: "Pizza",
-            sauce: 'Tomato',
-            cheese: 'Cheddar',
-            crust: 'Thick',
-            size: 'Small',
+            food_id: null,
+            flavor_id: null,
+            food_name: null,
+            sauce: null,
+            cheese: null,
+            crust: null,
+            size: null,
             slices: 8,
             toppings: []
-          }
+          },
+          customizableFields: [
+            'flavor_id',
+            'sauce',
+            'cheese',
+            'crust',
+            'size',
+            'slices'
+          ]
         }
       },
       methods: {
+        onfoodchange: function() {
+          var self = this;
+          var food = this.foods.find((food) => {
+            return food.id == this.product.food_id;
+          });
+          this.product.food_name = food.name;
+          if (!food.customizable) {
+            this.customizableFields.forEach(function(field) {
+              self.product[field] = null;
+            });
+            this.product.topping = [];
+          } else {
+            this.product.slices = 8;
+          }
+        },
         submit: function() {
           this.products.push(Object.assign({}, this.product));
         },
@@ -51,6 +74,7 @@ function OrdersClient() {
             data: body,
             dataType: 'JSON',
             success: function(data) {
+              self.products = [];
               self.orders.unshift(data);
             }
           });
@@ -70,7 +94,34 @@ function OrdersClient() {
         };
         return {
           orders: [{id: 1, state: 'q'}, {id: 2, state: 'q'}],
-          order: order
+          order: order,
+          foods: [
+            {
+              "id": 1,
+              "name": "Pizza",
+              "customizable": true
+            },
+            {
+              "id": 2,
+              "name": "Spaghetti Bolognese",
+              "customizable": false
+            },
+            {
+              "id": 3,
+              "name": "Lasagna",
+              "customizable": false
+            },
+            {
+              "id": 4,
+              "name": "Caesar Salad",
+              "customizable": false
+            },
+            {
+              "id": 5,
+              "name": "Greek Salad",
+              "customizable": false
+            }
+          ],
         };
       },
       methods: {
