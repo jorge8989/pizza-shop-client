@@ -10,6 +10,21 @@ function ToppingsClient() {
             name: ''
           }
         }
+      },
+      methods: {
+        submit: function() {
+          var self = this;
+          $.ajax({
+            type: "POST",
+            url: 'http://localhost:3010/api/toppings',
+            data: self.topping,
+            dataType: 'JSON',
+            success: function(data) {
+              self.toppings.push(data);
+              self.topping.name = null;
+            }
+          });
+        }
       }
     });
 
