@@ -5,6 +5,7 @@
         <tr>
           <th>ID</th>
           <th>Name</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -13,6 +14,11 @@
             {{topping.id}}
           </td>
           <td>{{topping.name}}</td>
+          <td>
+            <button v-if="toppings.length > 1" class="btn btn-danger btn-sm" v-on:click="destroy(topping.id)">
+              Delete
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>

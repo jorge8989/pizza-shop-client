@@ -24,6 +24,19 @@ function ToppingsClient() {
               self.topping.name = null;
             }
           });
+        },
+        destroy: function(id) {
+          var self = this;
+          $.ajax({
+            type: "DELETE",
+            url: 'http://localhost:3010/api/toppings/' + id,
+            dataType: 'JSON',
+            success: function(data) {
+              self.toppings = self.toppings.filter(function(tp) {
+                return tp.id != id;
+              });
+            }
+          });
         }
       }
     });
