@@ -1,0 +1,44 @@
+<h1>Orders</h1>
+<script type="text/template" class="orders-table-template">
+  <div>
+    <div v-for="order of orders" :key="order.id">
+      <h4>Order {{order.id}}</h4>
+      <h5>State: {{order.state}}</h5>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Food</th>
+            <th>Size</th>
+            <th>Sauce</th>
+            <th>Cheese</th>
+            <th>Crust</th>
+            <th>Toppings</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="product of order.products">
+            <td>
+              {{product.id}}
+            </td>
+            <td>
+              {{product.food_name}}
+            </td>
+            <td>{{product.size}}</td>
+            <td>{{product.sauce}}</td>
+            <td>{{product.cheese}}</td>
+            <td>{{product.crust}}</td>
+            <td>
+              <span v-for="topping of product.toppings" :key="topping.id">
+                {{topping.name}}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</script>
+<div class="vue-app">
+  <orders-table-component v-bind:orders="orders"></orders-table-component>
+</div>
