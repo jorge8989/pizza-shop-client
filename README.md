@@ -25,3 +25,11 @@ with a RESTful API. Every generated Rails app is
 structured with the MVC (Model-View-Controller) design pattern. However,
 this app doesn't have a database or models. So the pattern for
 this particular app would be a VC (Controller-View).
+
+## Usage
+
+these are the available pages:
+- **/**   (Homepage, create orders and see the list of orders)
+- **/flavors** (manage flavors)
+- **/toppigns** (manage toppings)
+- **/foods** (see the list of foods)
