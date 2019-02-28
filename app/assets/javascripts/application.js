@@ -15,3 +15,5 @@
 //= require turbolinks
 //= require vue.min
 //= require orders
+//= require flavors
+//= require toppings

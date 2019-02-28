@@ -9,6 +9,14 @@ function OrdersClient() {
       template: $('.orders-table-template').text(),
       props: ['orders']
     });
+    var FlavorsTableComponent = Vue.extend({
+      template: $('.flavors-table-template').text(),
+      data: function() {
+        return {
+          flavors: []
+        }
+      }
+    });
     var OrderFormComponent = Vue.extend({
       template: $('.order-form-template').text(),
       props: ['orders', 'foods'],
@@ -86,7 +94,8 @@ function OrdersClient() {
       el: '.vue-app',
       components: {
         'orders-table-component': OrdersTableComponent,
-        'order-form-component': OrderFormComponent
+        'order-form-component': OrderFormComponent,
+        'flavors-table-component': FlavorsTableComponent
       },
       data: function() {
         var order = {
@@ -95,6 +104,7 @@ function OrdersClient() {
         return {
           orders: [{id: 1, state: 'q'}, {id: 2, state: 'q'}],
           order: order,
+          flavors: [],
           foods: [
             {
               "id": 1,
