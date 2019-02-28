@@ -24,6 +24,19 @@ function FlavorsClient() {
               self.flavor.name = null;
             }
           });
+        },
+        destroy: function(id) {
+          var self = this;
+          $.ajax({
+            type: "DELETE",
+            url: 'http://localhost:3010/api/flavors/' + id,
+            dataType: 'JSON',
+            success: function(data) {
+              self.flavors = self.flavors.filter(function(fl) {
+                return fl.id != id;
+              });
+            }
+          });
         }
       }
     });
@@ -47,7 +60,6 @@ function FlavorsClient() {
             dataType: 'JSON',
             success: function(data) {
               self.flavors = data;
-              console.log(data);
             },
           });
         },

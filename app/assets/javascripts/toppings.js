@@ -47,7 +47,6 @@ function ToppingsClient() {
             dataType: 'JSON',
             success: function(data) {
               self.toppings = data;
-              console.log(data);
             },
           });
         },

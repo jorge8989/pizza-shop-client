@@ -5,14 +5,20 @@
         <tr>
           <th>ID</th>
           <th>Name</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="flavor of flavors">
+        <tr v-for="flavor of flavors" :key="flavor.id">
           <td>
             {{flavor.id}}
           </td>
           <td>{{flavor.name}}</td>
+          <td>
+            <button v-if="flavors.length > 1" class="btn btn-danger btn-sm" v-on:click="destroy(flavor.id)">
+              Delete
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
