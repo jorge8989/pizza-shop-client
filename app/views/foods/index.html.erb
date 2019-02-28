@@ -1,0 +1,28 @@
+<script type="text/template" class="foods-table-template">
+  <div>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="food of foods">
+          <td>
+            {{food.id}}
+          </td>
+          <td>{{food.name}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</script>
+<div class="foods-vue-app">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Foods</h2>
+      <foods-table-component v-bind:foods="foods"></foods-table-component>
+    </div>
+  </div>
+</div>

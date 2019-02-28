@@ -17,3 +17,4 @@
 //= require orders
 //= require flavors
 //= require toppings
+//= require foods

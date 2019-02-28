@@ -4,4 +4,5 @@ Rails.application.routes.draw do
 
   resources :flavors, only: :index
   resources :toppings, only: :index
+  resources :foods, only: :index
 end
