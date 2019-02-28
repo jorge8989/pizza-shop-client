@@ -9,17 +9,9 @@ function OrdersClient() {
       template: $('.orders-table-template').text(),
       props: ['orders']
     });
-    var FlavorsTableComponent = Vue.extend({
-      template: $('.flavors-table-template').text(),
-      data: function() {
-        return {
-          flavors: []
-        }
-      }
-    });
     var OrderFormComponent = Vue.extend({
       template: $('.order-form-template').text(),
-      props: ['orders', 'foods'],
+      props: ['orders', 'foods', 'flavors'],
       data: function() {
         return {
           cheeses: ['Cheddar', 'American'],
@@ -95,43 +87,16 @@ function OrdersClient() {
       components: {
         'orders-table-component': OrdersTableComponent,
         'order-form-component': OrderFormComponent,
-        'flavors-table-component': FlavorsTableComponent
       },
       data: function() {
         var order = {
           state: 'queued'
         };
         return {
-          orders: [{id: 1, state: 'q'}, {id: 2, state: 'q'}],
+          orders: [],
           order: order,
           flavors: [],
-          foods: [
-            {
-              "id": 1,
-              "name": "Pizza",
-              "customizable": true
-            },
-            {
-              "id": 2,
-              "name": "Spaghetti Bolognese",
-              "customizable": false
-            },
-            {
-              "id": 3,
-              "name": "Lasagna",
-              "customizable": false
-            },
-            {
-              "id": 4,
-              "name": "Caesar Salad",
-              "customizable": false
-            },
-            {
-              "id": 5,
-              "name": "Greek Salad",
-              "customizable": false
-            }
-          ],
+          foods: [],
         };
       },
       methods: {
@@ -146,12 +111,36 @@ function OrdersClient() {
             },
           });
         },
+        getFoods: function() {
+          var self = this;
+          $.ajax({
+            method: 'GET',
+            url: 'http://localhost:3010/api/foods',
+            dataType: 'JSON',
+            success: function(data) {
+              self.foods = data;
+            },
+          });
+        },
+        getFlavors: function() {
+          var self = this;
+          $.ajax({
+            method: 'GET',
+            url: 'http://localhost:3010/api/flavors',
+            dataType: 'JSON',
+            success: function(data) {
+              self.flavors = data;
+            },
+          });
+        },
         addorder: function(order) {
           this.orders.unshift(order);
         }
       },
       mounted: function() {
         this.getOrders();
+        this.getFoods();
+        this.getFlavors();
       }
     });
   }
