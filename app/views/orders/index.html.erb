@@ -3,47 +3,59 @@
     <h2>New Order</h2>
     <products-table-component v-bind:products="products"></products-table-component>
     <form v-on:submit.prevent="submit()">
-      <div class="form-group">
-        <label for="food_id">Food</label>
-        <select class="form-control" v-model=product.food_id id="food_id" v-on:change="onfoodchange" required>
-          <option v-for="food in foods" :value="food.id">{{ food.name }}</option>
-        </select>
-      </div>
-      <div v-if="product.food_name == 'Pizza'" class="form-group">
-        <label for="food_id">Flavor</label>
-        <select class="form-control" v-model=product.flavor_id id="flavor" required>
-          <option v-for="flavor in flavors" :value="flavor.id">{{ flavor.name }}</option>
-        </select>
-      </div>
-      <div v-if="product.food_name == 'Pizza'" class="form-group">
-        <label for="food_id">Cheese</label>
-        <select class="form-control" v-model=product.cheese id="cheese" required>
-          <option v-for="cheese in cheeses" :value="cheese">{{ cheese }}</option>
-        </select>
-      </div>
-      <div v-if="product.food_name == 'Pizza'" class="form-group">
-        <label for="food_id">Sauce</label>
-        <select class="form-control" v-model=product.sauce id="sauce" required>
-          <option v-for="sauce in sauces" :value="sauce">{{ sauce }}</option>
-        </select>
-      </div>
-      <div v-if="product.food_name == 'Pizza'" class="form-group">
-        <label for="food_id">Crust</label>
-        <select class="form-control" v-model=product.crust id="crust" required>
-          <option v-for="crust in crusts" :value="crust">{{ crust }}</option>
-        </select>
-      </div>
-      <div v-if="product.food_name == 'Pizza'" class="form-group">
-        <label for="food_id">Size</label>
-        <select class="form-control" v-model=product.size id="size" required>
-          <option v-for="size in sizes" :value="size">{{ size }}</option>
-        </select>
-      </div>
-      <div v-if="product.food_name == 'Pizza'" class="form-group">
-        <label for="food_id">Number of slices</label>
-        <select class="form-control" v-model=product.slices id="slices" required>
-          <option v-for="slices in slices_options" :value="slices">{{ slices }}</option>
-        </select>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="food_id">Food</label>
+            <select class="form-control" v-model=product.food_id id="food_id" v-on:change="onfoodchange" required>
+              <option v-for="food in foods" :value="food.id">{{ food.name }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6">
+              <div v-if="product.food_name == 'Pizza'" class="form-group">
+                <label for="food_id">Flavor</label>
+                <select class="form-control" v-model=product.flavor_id id="flavor" required>
+                  <option v-for="flavor in flavors" :value="flavor.id">{{ flavor.name }}</option>
+                </select>
+              </div>
+              <div v-if="product.food_name == 'Pizza'" class="form-group">
+                <label for="food_id">Cheese</label>
+                <select class="form-control" v-model=product.cheese id="cheese" required>
+                  <option v-for="cheese in cheeses" :value="cheese">{{ cheese }}</option>
+                </select>
+              </div>
+              <div v-if="product.food_name == 'Pizza'" class="form-group">
+                <label for="food_id">Sauce</label>
+                <select class="form-control" v-model=product.sauce id="sauce" required>
+                  <option v-for="sauce in sauces" :value="sauce">{{ sauce }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div v-if="product.food_name == 'Pizza'" class="form-group">
+                <label for="food_id">Crust</label>
+                <select class="form-control" v-model=product.crust id="crust" required>
+                  <option v-for="crust in crusts" :value="crust">{{ crust }}</option>
+                </select>
+              </div>
+              <div v-if="product.food_name == 'Pizza'" class="form-group">
+                <label for="food_id">Size</label>
+                <select class="form-control" v-model=product.size id="size" required>
+                  <option v-for="size in sizes" :value="size">{{ size }}</option>
+                </select>
+              </div>
+              <div v-if="product.food_name == 'Pizza'" class="form-group">
+                <label for="food_id">Number of slices</label>
+                <select class="form-control" v-model=product.slices id="slices" required>
+                  <option v-for="slices in slices_options" :value="slices">{{ slices }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <input type="submit" value="Add product to the order" class="btn btn-success btn-block">
