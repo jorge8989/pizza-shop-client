@@ -34,10 +34,10 @@
         </select>
       </div>
       <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-success btn-small">
+        <input type="submit" value="Add product to the order" class="btn btn-success btn-block">
       </div>
     </form>
-    <button class="btn btn-primary btn-md" :disabled="products.length < 1" v-on:click="makerOrder">Submit Order</button>
+    <button class="btn btn-primary btn-md btn-block" :disabled="products.length < 1" v-on:click="makerOrder">Submit Order</button>
   </div>
 </script>
 <script type="text/template" class="products-table-template">
@@ -53,7 +53,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="product of products">
+      <tr v-if="products.length > 0" v-for="product of products">
         <td>
           {{product.food_name}}
         </td>
@@ -66,6 +66,9 @@
             {{topping.name}}
           </p>
         </td>
+      </tr>
+      <tr v-if="products.length == 0">
+        <td align="center" colspan="6">No products yet</td>
       </tr>
     </tbody>
   </table>
